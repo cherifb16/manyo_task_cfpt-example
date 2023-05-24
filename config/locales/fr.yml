@@ -9,6 +9,20 @@ fr:
         title: titre
         content: contenu
         created_at: date et heure de création
+        deadline_on: Date limite
+        priority:  priorité
+        status: statut
+
+        enum:
+          task:
+            priority:
+              low: faible
+              middle: moyen
+              high: haut
+            status:
+              todo: Pas commencé
+              doing: en cours
+              done: complétée 
     
 
       #user:
