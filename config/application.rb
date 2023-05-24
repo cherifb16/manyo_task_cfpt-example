@@ -9,6 +9,8 @@ Bundler.require(*Rails.groups)
 module CdpWebManyoTask
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
+    config.i18n.default_locale = :fr
+    config.time_zone = 'UTC'
     config.load_defaults 6.0
     config.generators do |g|
       g.assets false
@@ -20,6 +22,7 @@ module CdpWebManyoTask
         routing_specs: false,
         controller_specs: false,
         request_specs: false
+       
     end
 
     # Settings in config/environments/* take precedence over those specified here.

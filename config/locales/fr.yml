@@ -1,0 +1,58 @@
+fr:
+  activerecord:
+    models:
+      task: tâche
+      content: contenu
+      created_at: date et heure de création
+    attributes:
+      task:
+        title: titre
+        content: contenu
+        created_at: date et heure de création
+    
+
+      #user:
+        #name: nom
+       # email: email
+        #password: mot de passe
+       # password_confirmation: confirmation du mot de passe
+  errors:
+    format: "%{message}%{attribute}"
+    messages:
+      blank: Veuillez entrer-
+      
+      #taken: déjà utilisé
+      #too_short: は6文字以上で入力してください
+      #confirmation: とパスワードの入力が一致しません
+  helpers:
+    submit:
+      create: Creer
+      update: Mettre à jour
+  nav:
+    tasks_index: Liste des tâches
+    new_task: Enregistrer une tâche
+    
+  common:
+    new: Nouvel tâche
+    show: détail
+    edit: Éditer
+    destroy: suppression
+    back: Retourner
+    create-task: Créer une tache
+    update-task: Mettre à jour
+    confirm_destroy: Êtes-vous sûr de vouloir supprimer ?
+  tasks:
+    index:
+      title: Page de la liste des tâches
+    new:
+      title: Page d'enregistrement des tâches
+    edit:
+      title: Page d'édition des tâches
+    show:
+      title: Page de détail de la tâche
+    create:
+      created: J'ai enregistré une tâche
+    update:
+      updated: Tâche mise à jour
+    destroy:
+      destroyed: Tâche supprimée
