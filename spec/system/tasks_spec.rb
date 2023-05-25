@@ -7,6 +7,9 @@ RSpec.describe 'Task management function', type: :system do
         visit new_task_path
         fill_in "Titre", with: "title"
         fill_in "contenu", with: "content"
+        fill_in "Date limite", with: Date.today
+        select "priorité", from: "task[priority]"
+        select "statut", from: "task[status]"
         click_button "Creer"
         expect(page).to have_content "J'ai enregistré une tâche"
       end
@@ -34,6 +37,9 @@ RSpec.describe 'Task management function', type: :system do
         visit new_task_path
         fill_in "Titre", with: "title1"
         fill_in "contenu", with: "content"
+        fill_in "Date limite", with: Date.today
+        select "high", from: "task[priority]"
+        select "done", from: "task[status]"
         click_button "Creer"
         expect(page).to have_content "title1"
         end
@@ -46,7 +52,6 @@ RSpec.describe 'Task management function', type: :system do
         let (:task) {FactoryBot.create(:task, titre: 'Test', content: 'Je suis un contenu')}
         it 'The content of the task is displayed' do
          
-          visit task_path(task)
           visit task_path(task)
           expect(page).to have_content 'Je suis un contenu'
         end
