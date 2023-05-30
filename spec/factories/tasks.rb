@@ -10,7 +10,7 @@ FactoryBot.define do
   factory :second_task, class: Task do
     titre { 'Test2' } 
     content { 'Content2 est ok' }
-    deadline_on { Date.today.since(2.day) }
+    deadline_on { Date.today.since(1.day) }
     priority { 'high' }
     status { 'doing' }
   end
