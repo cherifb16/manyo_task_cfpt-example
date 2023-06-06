@@ -7,4 +7,8 @@ class User < ApplicationRecord
   has_secure_password
 
   before_validation { email.downcase! }
+
+  def admin?
+    admin
+  end
 end

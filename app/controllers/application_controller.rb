@@ -12,4 +12,8 @@ class ApplicationController < ActionController::Base
     def already_logged_in
       redirect_to tasks_path, alert: "Please log in." if current_user
     end
+
+    def admin_required
+        redirect_to tasks_path, notice: "Only administrators have access.\" unless current_user.admin
+    end
 end

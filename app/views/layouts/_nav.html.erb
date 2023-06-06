@@ -1,6 +1,6 @@
 <nav class="navbar bg-light">
     <% if logged_in? %>
-      <p><strong><%= "🟠" if current_user.admin? %> <%= current_user.name %></strong></p>
+    <p><strong>Logged in as Mr.<%= "🟠" if current_user.admin? %> <%= current_user.name %></strong></p>
     <% end %>
     <ul class="navbar-nav">     
         <% if logged_in? %>
