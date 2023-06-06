@@ -10,5 +10,10 @@
     Task.find_or_create_by(
       titre: "Task#{i+1}",
       content: "Content#{i*10}",
+      deadline_on: Date.today.since(30),
+    priority: [0, 1, 2].sample,
+    status: [0, 1, 2].sample
     )
 end
+
+
