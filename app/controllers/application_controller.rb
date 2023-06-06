@@ -14,6 +14,10 @@ class ApplicationController < ActionController::Base
     end
 
     def admin_required
-        redirect_to tasks_path, notice: "Only administrators have access.\" unless current_user.admin
+        redirect_to tasks_path, alert: "Only administrators have access." unless current_user.admin
     end
+
+    def current_user_required(user)
+        redirect_to tasks_path, alert: "You have no access rights." unless current_user ==  user
+      end
 end

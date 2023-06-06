@@ -3,7 +3,7 @@ class Admin::UsersController < ApplicationController
     before_action :admin_required
 
   def index
-    @users = User.all
+    @users = User.includes(:tasks).all
   end
 
   def show
@@ -35,8 +35,11 @@ class Admin::UsersController < ApplicationController
   end
 
   def destroy
-    @user.destroy
-    redirect_to admin_users_path, notice: 'user has been deleted'
+    if @user.destroy
+      redirect_to admin_users_path, notice: 'User deleted.'
+    else
+      redirect_to admin_users_path, alert: 'Cannot be deleted because there are zero accounts with administrative rights'
+    end
   end
 
   private
