@@ -1,7 +1,14 @@
 require 'rails_helper'
 
 RSpec.describe 'Task management function', type: :system do
+  let!(:user) { FactoryBot.create(:user) }
    describe 'Registration function' do
+    before do
+      visit new_session_path
+      fill_in "email address", with: user.email
+      fill_in "(password)", with: "password"
+      click_button "login"
+    end
     context 'When registering a task' do
       it 'The registered task is displayed' do
         visit new_task_path
@@ -20,10 +27,14 @@ RSpec.describe 'Task management function', type: :system do
   end
 
   describe 'List display function' do
-    let!(:first_task) { FactoryBot.create(:task, titre: "first_task", created_at: Time.zone.now.ago(3.days),priority: :low, status: :todo) }
-    let!(:second_task) { FactoryBot.create(:task, titre: "second_task", created_at: Time.zone.now.ago(2.days),priority: :middle, status: :doing) }
-    let!(:third_task) { FactoryBot.create(:task, titre: "third_task", created_at: Time.zone.now.ago(1.days),priority: :high, status: :done) }
+    let!(:first_task) { FactoryBot.create(:task, titre: "first_task", created_at: Time.zone.now.ago(3.days),priority: :low, status: :todo, user: user) }
+    let!(:second_task) { FactoryBot.create(:task, titre: "second_task", created_at: Time.zone.now.ago(2.days),priority: :middle, status: :doing, user: user) }
+    let!(:third_task) { FactoryBot.create(:task, titre: "third_task", created_at: Time.zone.now.ago(1.days),priority: :high, status: :done, user: user) }
       before do
+        visit new_session_path
+        fill_in "email address", with: user.email
+        fill_in "(password)", with: "password"
+        click_button "login"
         visit tasks_path
       end
 
@@ -53,7 +64,7 @@ RSpec.describe 'Task management function', type: :system do
 
       describe 'Detailed display function' do
         context 'When transitioned to any task details screen' do
-          let (:task) {FactoryBot.create(:task, titre: 'Test', content: 'Je suis un contenu')}
+          let (:task) {FactoryBot.create(:task, titre: 'Test', content: 'Je suis un contenu', user: user)}
           it 'The content of the task is displayed' do
             visit task_path(task)
             expect(page).to have_content 'Je suis un contenu'
