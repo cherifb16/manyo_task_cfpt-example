@@ -1,6 +1,9 @@
 require 'rails_helper'
 
 RSpec.describe Task, type: :model do
+
+  let!(:user) { FactoryBot.create(:user) }
+
   describe 'Validation test' do
     context 'If the task Title is an empty string' do
       it 'Validation fails' do
@@ -9,7 +12,8 @@ RSpec.describe Task, type: :model do
           content: 'Create a proposal.',
           deadline_on: Date.today,
           priority: 'low',
-          status: 'done'
+          status: 'done',
+          user_id: user.id
           )
         expect(task).not_to be_valid
       end
@@ -23,6 +27,7 @@ RSpec.describe Task, type: :model do
           deadline_on: 'Date.today',
           priority: 'low',
           status: 'done',
+          user_id: user.id
         )
           
         expect(task).not_to be_valid
@@ -37,6 +42,7 @@ RSpec.describe Task, type: :model do
           deadline_on: '',
           priority: 'low',
           status: 'done',
+          user_id: user.id
         )
           
         expect(task).not_to be_valid
@@ -51,6 +57,7 @@ RSpec.describe Task, type: :model do
           deadline_on: 'Date.today',
           priority: '',
           status: 'done',
+          user_id: user.id
         )
           
         expect(task).not_to be_valid
@@ -65,6 +72,7 @@ RSpec.describe Task, type: :model do
           deadline_on: Date.today,
           priority: 'low',
           status: '',
+          user_id: user.id
           )
           expect(task).not_to be_valid
       end
@@ -78,6 +86,7 @@ RSpec.describe Task, type: :model do
           deadline_on: Date.today,
           priority: 'low',
           status: 'done',
+          user_id: user.id
           )
         expect(task).to be_valid
       end
@@ -85,9 +94,9 @@ RSpec.describe Task, type: :model do
   end
 
   describe 'search function' do
-    let!(:first_task) { FactoryBot.create(:task, titre: 'first_task_title') }
-    let!(:second_task) { FactoryBot.create(:second_task, titre: "second_task_title") }
-    let!(:third_task) { FactoryBot.create(:third_task, titre: "third_task_title") }
+    let!(:first_task) { FactoryBot.create(:task, titre: 'first_task_title', user: user) }
+    let!(:second_task) { FactoryBot.create(:second_task, titre: "second_task_title", user: user) }
+    let!(:third_task) { FactoryBot.create(:third_task, titre: "third_task_title", user: user) }
 
     context 'If a fuzzy search for a title is performed using the scope method' do
       it "Tasks containing search terms are narrowed down." do
