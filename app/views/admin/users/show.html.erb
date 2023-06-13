@@ -1,0 +1,44 @@
+<h1>User details page</h1>
+
+<p>
+  <strong><%= User.human_attribute_name(:name) %>:</strong>
+  <%= @user.name %>
+</p>
+
+<p>
+  <strong><%= User.human_attribute_name(:email) %>:</strong>
+  <%= @user.email %>
+</p>
+
+<p>
+  <strong><%= User.human_attribute_name(:admin) %>:</strong>
+  <%= @user.admin ? "yes" : "no" %>
+</p>
+
+<table>
+  <thead>
+    <tr>
+      <th><%= Task.human_attribute_name(:title) %></th>
+      <th><%= Task.human_attribute_name(:content) %></th>
+      <th><%= Task.human_attribute_name(:created_at) %></th>
+      <th><%= Task.human_attribute_name(:deadline_on) %></th>
+      <th><%= Task.human_attribute_name(:priority) %></th>
+      <th><%= Task.human_attribute_name(:status) %></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @user.tasks.each do |task| %>
+      <tr>
+        <td><%= task.titre %></td>
+        <td><%= task.content %></td>
+        <td><%= task.created_at.strftime("%Y/%m/%d %H:%M") %></td>
+        <td><%= task.deadline_on.strftime("%Y/%m/%d") %></td>
+        <td><%= t("enum.task.priority.#{task.priority}") %></td>
+        <td><%= t("enum.task.status.#{task.status}") %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to t('common.back'), admin_users_path, id: "back" %>

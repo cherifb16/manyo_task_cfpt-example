@@ -13,6 +13,13 @@ fr:
         priority:  priorité
         status: statut
 
+      user:
+        name: Nom
+        email: Adresse email
+        password: Mot de passe
+        password_confirmation: Mot de passe (confirmation)
+        admin: Droits d'administrateur
+
         enum:
           task:
             priority:
@@ -35,9 +42,9 @@ fr:
     messages:
       blank: Veuillez entrer-
       
-      #taken: déjà utilisé
-      #too_short: は6文字以上で入力してください
-      #confirmation: とパスワードの入力が一致しません
+      taken: déjà utilisé
+      too_short: Veuillez saisir au moins 6 caractères
+      confirmation: et le mot de passe ne correspondent pas
   helpers:
     submit:
       create: Creer

@@ -1,11 +1,20 @@
 <nav class="navbar bg-light">
-  <ul class="navbar-nav">
-        <li class="nav-item">
-        
-         <%= link_to t('nav.tasks_index'), tasks_path , id:"tasks-index"%>
-        </li>
-        <li class="nav-item">
-        <%= link_to t('nav.new_task'), new_task_path, id: "new-task" %>
-        </li>
+    <% if logged_in? %>
+    <p><strong>Logged in as Mr.<%= "🟠" if current_user.admin? %> <%= current_user.name %></strong></p>
+    <% end %>
+    <ul class="navbar-nav">     
+        <% if logged_in? %>
+        <% if current_user.admin? %>
+          <li><%= link_to "List of users", admin_users_path, id: "users-index" %></li>
+          <li><%= link_to "Registering users", new_admin_user_path, id: "add-user" %></li>
+        <% end %>
+        <li><%= link_to t('nav.tasks_index'), tasks_path, id: "tasks-index" %></li>
+        <li><%= link_to t('nav.new_task'), new_task_path, id: "new-task" %></li>
+        <li><%= link_to "Account details.", user_path(current_user.id), id: "my-account" %></li>
+        <li><%= link_to "logout", session_path(current_user.id), method: :delete, id: 'sign-out' %></li>
+      <% else %>
+        <li><%= link_to "Account Registration", new_user_path, id: "sign-up" %></li>
+        <li><%= link_to "login", new_session_path, id: "sign-in" %></li>
+      <% end %>
     </ul > 
 </nav>
